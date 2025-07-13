@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,21 +8,22 @@
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <header class="masthead">
     <h1 id="page-title">lipu suli</h1>
     <p id="page-date" class="date"></p>
     <button id="dark-mode-toggle">🌓</button>
+    <button id="install-btn" style="display:none;">➕ Install</button>
   </header>
   <main class="content">
-    <p>Welcome to lipu suli. Here is the latest feed.</p>
-    <!-- feed content goes here -->
+    <ul id="articles-list"></ul>
   </main>
   <nav class="bottom-nav">
     <a href="index.html"><span>🏠</span><br><span>tomo</span></a>
     <a href="saved.html"><span>💾</span><br><span>mani</span></a>
-    <a href="play.html"><span>🎮</span><br><span>musi</span></a>
   </nav>
   <script src="main.js"></script>
 </body>
+
 </html>
