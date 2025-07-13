@@ -1,40 +1,135 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
 body {
   font-family: 'Georgia', serif;
   margin: 0;
   padding: 0;
   background: #fff;
   color: #111;
+  transition: background 0.3s, color 0.3s;
+  line-height: 1.6;
 }
+
+body.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+
 header {
-  background: #fff;
+  background: inherit;
   padding: 1em;
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: bold;
   border-bottom: 1px solid #ccc;
+  text-align: center;
 }
+
+.branding {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+}
+
+.branding h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2em;
+  margin: 0;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+#theme-toggle {
+  margin-left: 1em;
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: inherit;
+}
+
 .tabs {
   display: flex;
   justify-content: center;
-  overflow-x: auto;
   border-bottom: 1px solid #ddd;
-  background: #fff;
+  background: inherit;
+  overflow-x: auto;
 }
+
 .tab {
   padding: 1em;
   border: none;
   background: none;
-  font-weight: bold;
+  font-family: 'Georgia', serif;
+  font-size: 1em;
   cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
+
 .tab.active {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid black;
 }
+
+body.dark .tab.active {
+  border-color: white;
+}
+
 .article {
   padding: 1em;
   border-bottom: 1px solid #eee;
 }
+
 .article h2 {
   margin-top: 0;
+  font-size: 1.3em;
+}
+
+/* Article Page Styles */
+article {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 1em;
+}
+
+article h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2em;
+  margin-bottom: 0.2em;
+}
+
+article footer {
+  margin-top: 2em;
+  font-size: 0.9em;
+  border-top: 1px solid #ccc;
+  padding-top: 1em;
+}
+
+
+.save-btn {
+  display: inline-block;
+  margin-top: 0.5em;
+  background: #eee;
+  border: none;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+}
+
+body.dark .save-btn {
+  background: #333;
+  color: #f1f1f1;
+}
+
+#read-later {
+  padding: 1em;
+  border-top: 1px solid #ccc;
+}
+
+#read-later h3 {
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
 }

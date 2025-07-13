@@ -5,16 +5,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>lipu suli</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
   <link rel="stylesheet" href="style.css" />
   <script defer src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
-    <h1>lipu suli</h1>
+    <div class="branding">
+      <img src="logo.png" alt="logo" class="logo"/>
+      <h1>lipu suli</h1>
+      <button id="theme-toggle" title="Switch theme">🌓</button>
+    </div>
     <nav id="source-tabs" class="tabs">
-      <button data-source="NYT" class="tab active">NYT</button>
-      <button data-source="Guardian" class="tab">Guardian</button>
-      <button data-source="NPR" class="tab">NPR</button>
+      <button data-source="NYT" class="tab active">🗽 NYT</button>
+      <button data-source="Guardian" class="tab">🛡️ Guardian</button>
+      <button data-source="NPR" class="tab">📻 NPR</button>
     </nav>
   </header>
   <main>
