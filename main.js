@@ -55,7 +55,7 @@ function displayArticles(source) {
       <p>${a.summary}</p>
       <a href="${a.file}">lukin e mute</a>
       <button onclick="toggleSave('${a.file}')" class="save-btn">
-        ${savedAlready ? '🔖 Remove' : '🔖 Read later'}
+        ${savedAlready ? 'weka' : 'lukin tenpo kama'}
       </button>
     `;
     container.appendChild(div);
