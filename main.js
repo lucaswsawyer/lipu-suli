@@ -1,4 +1,3 @@
-
 let articles = [];
 let saved = JSON.parse(localStorage.getItem("readLater") || "[]");
 
@@ -18,13 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Theme toggle on index
   const themeToggle = document.getElementById("theme-toggle");
   themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
+    document.documentElement.classList.toggle("dark");
     localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
   });
-
   if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark");
     document.body.classList.add("dark");
   }
 
@@ -43,24 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
 function displayArticles(source) {
   const container = document.getElementById("articles");
   container.innerHTML = "";
-
   const filtered = articles.filter(a => a.publisher === source);
-
   filtered.forEach(a => {
     const div = document.createElement("div");
     div.className = "article";
-    const savedAlready = saved.includes(a.file);
+    const isSaved = saved.includes(a.file);
     div.innerHTML = `
       <h2>${a.title}</h2>
       <p>${a.summary}</p>
       <a href="${a.file}">lukin e mute</a>
       <button onclick="toggleSave('${a.file}')" class="save-btn">
-        ${savedAlready ? 'weka' : 'lukin tenpo kama'}
+        ${isSaved ? 'weka' : 'lukin tenpo kama'}
       </button>
     `;
     container.appendChild(div);
   });
-
   renderSaved();
 }
 
@@ -70,7 +68,6 @@ function toggleSave(file) {
     saved.splice(idx, 1);
   } else {
     saved.push(file);
-    // Cache article
     if ('caches' in window) {
       caches.open('lipu-cache').then(cache => cache.add(file));
     }
@@ -85,8 +82,7 @@ function renderSaved() {
     sec.innerHTML = "";
     return;
   }
-
   sec.innerHTML = "<h3>lipu pi lukin kama</h3><ul>" + saved.map(f =>
-    `<li><a href="${f}">${f}</a> <button onclick="toggleSave('${f}')">❌</button></li>`
+    `<li><a href="\${f}">\${f}</a> <button onclick="toggleSave('\${f}')">weka</button></li>`
   ).join("") + "</ul>";
 }

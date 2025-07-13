@@ -1,9 +1,7 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Libre+Baskerville:wght@400;700&display=swap');
 
 body {
-  font-family: 'Georgia', serif;
+  font-family: 'Merriweather', serif;
   margin: 0;
   padding: 0;
   background: #fff;
@@ -11,69 +9,54 @@ body {
   transition: background 0.3s, color 0.3s;
   line-height: 1.6;
 }
-
 body.dark {
   background: #121212;
   color: #f1f1f1;
 }
 
+.site-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2.5em;
+  text-align: center;
+  margin: 0.5em;
+}
+
 header {
   background: inherit;
-  padding: 1em;
-  border-bottom: 1px solid #ccc;
+  padding: 0.5em;
   text-align: center;
-}
-
-.branding {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6em;
-}
-
-.branding h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2em;
-  margin: 0;
-}
-
-.logo {
-  width: 32px;
-  height: 32px;
+  border-bottom: 1px solid #ccc;
 }
 
 #theme-toggle {
-  margin-left: 1em;
   background: none;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
   color: inherit;
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }
 
 .tabs {
   display: flex;
   justify-content: center;
   border-bottom: 1px solid #ddd;
-  background: inherit;
-  overflow-x: auto;
+  margin-top: 0.5em;
 }
-
 .tab {
-  padding: 1em;
+  padding: 0.5em 1em;
   border: none;
   background: none;
-  font-family: 'Georgia', serif;
+  font-family: 'Merriweather', serif;
   font-size: 1em;
   cursor: pointer;
   font-weight: 600;
-  letter-spacing: 0.03em;
 }
-
 .tab.active {
   border-bottom: 3px solid black;
 }
-
 body.dark .tab.active {
   border-color: white;
 }
@@ -82,43 +65,20 @@ body.dark .tab.active {
   padding: 1em;
   border-bottom: 1px solid #eee;
 }
-
 .article h2 {
   margin-top: 0;
-  font-size: 1.3em;
+  font-family: 'Libre Baskerville', serif;
 }
-
-/* Article Page Styles */
-article {
-  max-width: 600px;
-  margin: 2em auto;
-  padding: 1em;
-}
-
-article h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2em;
-  margin-bottom: 0.2em;
-}
-
-article footer {
-  margin-top: 2em;
-  font-size: 0.9em;
-  border-top: 1px solid #ccc;
-  padding-top: 1em;
-}
-
 
 .save-btn {
   display: inline-block;
   margin-top: 0.5em;
   background: #eee;
-  border: none;
+  border: 1px solid #ccc;
   padding: 0.4em 0.8em;
   cursor: pointer;
-  font-family: 'Georgia', serif;
+  font-family: 'Merriweather', serif;
 }
-
 body.dark .save-btn {
   background: #333;
   color: #f1f1f1;
@@ -128,56 +88,11 @@ body.dark .save-btn {
   padding: 1em;
   border-top: 1px solid #ccc;
 }
-
 #read-later h3 {
   font-size: 1.1em;
   margin-bottom: 0.5em;
 }
-
-/* Site title in script font */
-.site-title {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.5em;
-  margin: 0;
-}
-
-/* Link colors inherit, no blue */
 a {
   color: inherit;
   text-decoration: underline;
-}
-
-/* Dark/light styles for links */
-body.dark a {
-  color: #f1f1f1;
-}
-body a {
-  color: #111;
-}
-
-/* Read later button text-only */
-.save-btn {
-  display: inline-block;
-  margin-top: 0.5em;
-  background: #eee;
-  border: 1px solid #ccc;
-  padding: 0.4em 0.8em;
-  cursor: pointer;
-  font-family: 'Georgia', serif;
-}
-body.dark .save-btn {
-  background: #333;
-  color: #f1f1f1;
-}
-
-
-/* Update fonts to evoke NYTimes style */
-body {
-  font-family: 'Merriweather', serif;
-}
-.site-title {
-  font-family: 'Libre Baskerville', serif;
-}
-article h1, .article h2 {
-  font-family: 'Libre Baskerville', serif;
 }

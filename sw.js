@@ -1,29 +1,25 @@
-
-self.addEventListener('install', function(e) {
+self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('lipu-cache').then(function(cache) {
-      return cache.addAll([
+    caches.open('lipu-cache').then(cache =>
+      cache.addAll([
         '/',
         '/index.html',
         '/style.css',
         '/main.js',
         '/articles.json',
         '/version.json',
-        '/manifest.json',
-        '/logo.png'
-      ]);
-    })
+        '/manifest.json'
+      ])
+    )
   );
 });
 
-self.addEventListener('fetch', function(e) {
+self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request).then((res) => {
-        return caches.open('lipu-cache').then((cache) => {
-          cache.put(e.request, res.clone());
-          return res;
-        });
+    caches.match(e.request).then(resp => {
+      return resp || fetch(e.request).then(r => {
+        caches.open('lipu-cache').then(cache => cache.put(e.request, r.clone()));
+        return r;
       });
     }).catch(() => caches.match('/index.html'))
   );
