@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tok">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Pona video toki e tawa moka malu sijan Rusia.</title>
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      }
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        document.body.classList.toggle('dark');
+        localStorage.setItem(
+          'theme',
+          document.body.classList.contains('dark') ? 'dark' : 'light'
+        );
+      });
+    });
+  </script>
+</head>
+<body>
+  <button id="theme-toggle">🌓</button>
+  <article>
+    <h1>Pona video toki e tawa moka malu sijan Rusia.</h1>
+    <p>jan Vladlen la pona moku e kafe pi St. Petersburg. Jan Matthew la sona toki.</p>
+    <footer>
+      <p>pali pi CNN</p>
+      <p><a href="https://www.cnn.com/videos/world/2023/04/02/russian-military-blogger-vladlen-tatarsky-killed-cafe-explosion-chance-vpx.cnn" target="_blank">lipu open →</a></p>
+      <p><a href="../index.html">← tawa open</a></p>
+    </footer>
+  </article>
+</body>
+</html>
