@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html lang="tok">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lipu suli</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Libre+Baskerville:wght@400;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script defer src="main.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {{
-      window.addEventListener('load', () => {{
-        navigator.serviceWorker.register('/sw.js');
-      }});
-    }}
-  </script>
 </head>
+
 <body>
   <header>
     <h1 class="site-title">lipu suli</h1>
     <button id="theme-toggle">🌓</button>
     <nav id="source-tabs" class="tabs">
-      <button data-source="NYT" class="tab active">NYT</button>
-      <button data-source="Guardian" class="tab">Guardian</button>
-      <button data-source="NPR" class="tab">NPR</button>
+      <button data-source="Guardian" class="tab active">Guardian</button>
+      <button data-source="BBC" class="tab">BBC</button>
+      <button data-source="Reuters" class="tab">Reuters</button>
+      <button data-source="CNN" class="tab">CNN</button>
     </nav>
   </header>
-  <main>
+
+  <!-- HOME VIEW -->
+  <main id="home-view" class="view">
     <div id="articles">Loading...</div>
+  </main>
+
+  <!-- SAVED VIEW -->
+  <main id="saved-view" class="view" style="display:none;">
+    <h2>Saved Articles</h2>
     <section id="read-later"></section>
   </main>
+
+  <!-- PLAY VIEW -->
+  <main id="play-view" class="view" style="display:none;">
+    <h2 class="view-title">Daily Wordle</h2>
+    <div class="wordle" id="wordle-grid"></div>
+    <div class="keyboard" id="keyboard"></div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-link active" data-view="home-view">🏠<span>Home</span></a>
+    <a href="#" class="nav-link" data-view="saved-view">🔖<span>Saved</span></a>
+    <a href="#" class="nav-link" data-view="play-view">🎮<span>Play</span></a>
+  </nav>
 </body>
+
 </html>
