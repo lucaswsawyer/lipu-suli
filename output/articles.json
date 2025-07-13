@@ -1,0 +1,23 @@
+[
+  {
+    "title": "jan li toki e lawa pi ma tomo",
+    "summary": "jan pi ma tomo li toki e sona pi lawa sin.",
+    "publisher": "NYT",
+    "file": "articles/2025-07-12-nyt-1.html",
+    "date": "2025-07-12"
+  },
+  {
+    "title": "kule suno li wile tawa lon mun",
+    "summary": "kule sin li lon mun pi nasa mute.",
+    "publisher": "Guardian",
+    "file": "articles/2025-07-12-guardian-1.html",
+    "date": "2025-07-12"
+  },
+  {
+    "title": "ilo musi sin li lon tomo pi toki pona",
+    "summary": "ilo musi ni li pali e toki pona lon nasin ante.",
+    "publisher": "NPR",
+    "file": "articles/2025-07-12-npr-1.html",
+    "date": "2025-07-12"
+  }
+]

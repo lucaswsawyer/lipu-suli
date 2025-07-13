@@ -1,0 +1,40 @@
+
+body {
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #111;
+}
+header {
+  background: #fff;
+  padding: 1em;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+.tab {
+  padding: 1em;
+  border: none;
+  background: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tab.active {
+  border-bottom: 3px solid #000;
+}
+.article {
+  padding: 1em;
+  border-bottom: 1px solid #eee;
+}
+.article h2 {
+  margin-top: 0;
+}
