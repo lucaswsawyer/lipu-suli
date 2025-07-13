@@ -1,3 +1,4 @@
+/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Libre+Baskerville:wght@400;700&display=swap');
 
 body {
@@ -9,11 +10,13 @@ body {
   transition: background 0.3s, color 0.3s;
   line-height: 1.6;
 }
+
 body.dark {
   background: #121212;
   color: #f1f1f1;
 }
 
+/* Site title */
 .site-title {
   font-family: 'Libre Baskerville', serif;
   font-size: 2.5em;
@@ -21,30 +24,34 @@ body.dark {
   margin: 0.5em;
 }
 
+/* Header */
 header {
-  background: inherit;
   padding: 0.5em;
   text-align: center;
   border-bottom: 1px solid #ccc;
+  position: relative;
 }
 
+/* Theme toggle button */
 #theme-toggle {
+  position: absolute;
+  top: 1em;
+  right: 1em;
   background: none;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
   color: inherit;
-  position: absolute;
-  top: 1em;
-  right: 1em;
 }
 
+/* Source-tabs */
 .tabs {
   display: flex;
   justify-content: center;
   border-bottom: 1px solid #ddd;
   margin-top: 0.5em;
 }
+
 .tab {
   padding: 0.5em 1em;
   border: none;
@@ -53,25 +60,36 @@ header {
   font-size: 1em;
   cursor: pointer;
   font-weight: 600;
+  color: #111;
+  /* default */
 }
+
 .tab.active {
   border-bottom: 3px solid black;
 }
-body.dark .tab.active {
-  border-color: white;
+
+body.dark .tab {
+  color: #f1f1f1;
+  /* text white in dark mode */
 }
 
+body.dark .tab.active {
+  border-color: #f1f1f1;
+}
+
+/* Articles list */
 .article {
   padding: 1em;
   border-bottom: 1px solid #eee;
 }
+
 .article h2 {
   margin-top: 0;
   font-family: 'Libre Baskerville', serif;
 }
 
+/* Read-later button */
 .save-btn {
-  display: inline-block;
   margin-top: 0.5em;
   background: #eee;
   border: 1px solid #ccc;
@@ -79,20 +97,47 @@ body.dark .tab.active {
   cursor: pointer;
   font-family: 'Merriweather', serif;
 }
+
 body.dark .save-btn {
   background: #333;
   color: #f1f1f1;
 }
 
+/* Read-later list */
 #read-later {
   padding: 1em;
   border-top: 1px solid #ccc;
 }
+
 #read-later h3 {
   font-size: 1.1em;
   margin-bottom: 0.5em;
 }
+
+/* Links inherit color */
 a {
   color: inherit;
   text-decoration: underline;
+}
+
+/* Article page */
+article {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 1em;
+  background: inherit;
+  color: inherit;
+}
+
+article h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2em;
+  margin-bottom: 0.2em;
+}
+
+article footer {
+  margin-top: 2em;
+  font-size: 0.9em;
+  border-top: 1px solid #ccc;
+  padding-top: 1em;
 }
