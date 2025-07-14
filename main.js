@@ -31,35 +31,36 @@ if (articlesList) {
   fetch('articles-index.json')
     .then(res => res.json())
     .then(data => {
-      // Clear any old entries
       articlesList.innerHTML = '';
+
       data.forEach(article => {
-        // Assume "file" is like "articles/bbc_somefile.html"
-        let src = article.publisher.toLowerCase().replace('the ', '').trim();
+        // Fix here: robust source matching
+        const src = article.publisher.toLowerCase().replace(/^the\s+/i, '').trim();
         const li = document.createElement('li');
         li.dataset.source = src;
         li.innerHTML = `<a href="${article.file}">${article.title}</a>`;
         articlesList.appendChild(li);
       });
 
-      // Attach filtering logic after rendering articles
       const tabButtons = document.querySelectorAll('.source-tabs button');
       tabButtons.forEach(btn => {
-        btn.onclick = () => {
+        btn.addEventListener('click', () => {
           tabButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          const chosen = btn.dataset.source.toLowerCase();
+          const chosen = btn.dataset.source.toLowerCase().trim();
           articlesList.querySelectorAll('li').forEach(li => {
             li.style.display = (li.dataset.source === chosen) ? '' : 'none';
           });
-        };
+        });
       });
 
-      // Optionally: Activate the first tab and filter on load
-      const firstTab = document.querySelector('.source-tabs button.active');
-      if (firstTab) firstTab.click();
-    });
+      // Trigger click event on the initially active tab to filter immediately
+      const activeTab = document.querySelector('.source-tabs button.active');
+      if (activeTab) activeTab.click();
+    })
+    .catch(err => console.error("Failed loading articles:", err));
 }
+
 
 // Saved Articles List
 const savedList = document.getElementById('saved-list');
