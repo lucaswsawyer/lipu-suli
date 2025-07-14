@@ -2,11 +2,10 @@ const CACHE_NAME = 'lipu-suli-shell-v1';
 const ASSETS = [
   '/index.html',
   '/saved.html',
-  '/play.html',
   '/styles.css',
   '/main.js',
-  '/play.js',
-  '/manifest.json'
+  '/manifest.json',
+  '/articles-index.json'
 ];
 
 self.addEventListener('install', evt => {

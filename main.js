@@ -28,7 +28,7 @@ if (darkToggle) {
 // Articles List: render and filter by source
 const articlesList = document.getElementById('articles-list');
 if (articlesList) {
-  fetch('./articles-index.json')
+  fetch('articles-index.json')
     .then(res => res.json())
     .then(data => {
       // Clear any old entries
