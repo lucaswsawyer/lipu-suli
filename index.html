@@ -5,20 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>lipu suli</title>
-  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
-  <script>
-    // Apply saved theme before rendering
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-  </script>
+  <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
   <header class="masthead">
-    <h1 id="page-title">lipu suli</h1>
-    <p id="page-date" class="date"></p>
+    <h1 id="page-title" class="centered">lipu suli</h1>
+    <p id="page-date" class="date centered"></p>
     <button id="dark-mode-toggle">🌓</button>
     <button id="install-btn" style="display:none;">➕ Install</button>
   </header>
