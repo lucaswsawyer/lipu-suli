@@ -1,4 +1,4 @@
-// Handle PWA install prompt
+// PWA install prompt handler
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
@@ -16,12 +16,12 @@ window.addEventListener('beforeinstallprompt', e => {
   }
 });
 
-// Register the service worker
+// Register Service Worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js');
+  navigator.serviceWorker.register('service-worker.js');
 }
 
-// Common initialization: date, version check, dark-mode toggle
+// Common: date, manifest version, dark-mode toggle
 (async function () {
   // Date under title
   const dateEl = document.getElementById('page-date');
@@ -31,9 +31,9 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Version check against manifest
+  // Version check
   try {
-    const mf = await fetch('/manifest.json');
+    const mf = await fetch('manifest.json');
     const { version } = await mf.json();
     const old = localStorage.getItem('appVersion');
     if (old !== version) {
@@ -46,12 +46,9 @@ if ('serviceWorker' in navigator) {
     console.warn('Manifest check failed', err);
   }
 
-  // Dark mode
+  // Dark mode toggle
   const toggle = document.getElementById('dark-mode-toggle');
   if (toggle) {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
     toggle.addEventListener('click', () => {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -59,36 +56,36 @@ if ('serviceWorker' in navigator) {
   }
 })();
 
-// Load and display articles on the Home page
+// Load articles on Home page
 (function () {
   const ul = document.getElementById('articles-list');
-  if (!ul) return;  // not on Home page
+  if (!ul) return;
 
   (async () => {
     try {
-      const resp = await fetch('/articles/articles.json');
+      const resp = await fetch('articles/articles.json');
       const files = await resp.json();
       let saved = JSON.parse(localStorage.getItem('savedArticles') || '[]');
 
       for (const file of files) {
-        const txt = await fetch(`/articles/${file}`).then(r => r.text());
-        const doc = new DOMParser().parseFromString(txt, 'text/html');
+        const txt = await fetch(`articles/${file}`).then(r => r.text());
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(txt, 'text/html');
         const title = doc.querySelector('h1')?.textContent || file;
 
         const li = document.createElement('li');
         const a = document.createElement('a');
-        a.href = `/articles/${file}`;
+        a.href = `articles/${file}`;
         a.textContent = title;
 
         const btn = document.createElement('button');
         btn.textContent = saved.includes(file) ? '✓ Saved' : '💾 Save';
-        btn.dataset.url = `/articles/${file}`;
         btn.onclick = () => {
           if (!saved.includes(file)) {
             saved.push(file);
             localStorage.setItem('savedArticles', JSON.stringify(saved));
+            navigator.serviceWorker.controller?.postMessage({ action: 'save-article', url: `articles/${file}` });
             btn.textContent = '✓ Saved';
-            navigator.serviceWorker.controller?.postMessage({ action: 'save-article', url: btn.dataset.url });
           }
         };
 
@@ -96,26 +93,26 @@ if ('serviceWorker' in navigator) {
         ul.appendChild(li);
       }
     } catch (e) {
-      console.error('Error loading articles:', e);
+      console.error('Error loading articles', e);
     }
   })();
 })();
 
-// Build the Saved page list
+// Build Saved list
 (function () {
   const ul = document.getElementById('saved-list');
-  if (!ul) return;  // not on Saved page
+  if (!ul) return;
 
   let saved = JSON.parse(localStorage.getItem('savedArticles') || '[]');
-  if (saved.length === 0) {
+  if (!saved.length) {
     ul.innerHTML = '<li>sina ala jo e lipu mani.</li>';
     return;
   }
 
-  saved.forEach(file => {
+  for (const file of saved) {
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = file;
+    a.href = `articles/${file}`;
     a.textContent = file.replace('.html', '').replace(/_/g, ' ');
 
     const btn = document.createElement('button');
@@ -128,5 +125,5 @@ if ('serviceWorker' in navigator) {
 
     li.append(a, ' ', btn);
     ul.appendChild(li);
-  });
+  }
 })();
