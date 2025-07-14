@@ -113,6 +113,7 @@ header.masthead {
   background: var(--nav-bg);
   border-top: 1px solid #ccc;
   height: 56px;
+  z-index: 100;
 }
 
 .bottom-nav a {
@@ -122,4 +123,14 @@ header.masthead {
   font-size: 12px;
   color: var(--nav-fg);
   padding-top: 6px;
+}
+
+main.content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.centered {
+  text-align: center;
 }
