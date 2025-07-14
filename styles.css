@@ -43,12 +43,14 @@ header.masthead {
   border-bottom: 1px solid #ccc;
 }
 
-.source-tabs button {
+.source-tabs button,
+.source-tabs a {
   flex: 1;
   padding: 10px;
   border: none;
   background: none;
   font-size: 1rem;
+  color: var(--text);
 }
 
 .source-tabs button.active {
@@ -59,6 +61,8 @@ header.masthead {
 .articles-list-item {
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+  list-style: none;
+  /* remove bullet points */
 }
 
 .article-title {
@@ -85,6 +89,14 @@ header.masthead {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.dark .article-actions a,
+.dark .article-actions button,
+.dark .source-tabs a,
+.dark .source-tabs button {
+  color: #ffffff;
+  /* fix dark mode visibility */
 }
 
 .article-actions button:hover,

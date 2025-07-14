@@ -7,17 +7,6 @@ window.addEventListener('beforeinstallprompt', e => {
   installBtn.onclick = () => deferredPrompt.prompt();
 });
 
-// Dark mode toggle persistence
-const darkToggle = document.getElementById('dark-mode-toggle');
-if (localStorage.getItem('theme') === 'dark') {
-  document.documentElement.classList.add('dark');
-}
-darkToggle.onclick = () => {
-  document.documentElement.classList.toggle('dark');
-  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-};
-
-// Load articles with NYTimes style
 fetch('articles-index.json').then(res => res.json()).then(data => {
   const articlesList = document.getElementById('articles-list');
   articlesList.innerHTML = '';
@@ -32,8 +21,8 @@ fetch('articles-index.json').then(res => res.json()).then(data => {
       <div class="article-title">${article.title}</div>
       <div class="article-summary">${article.summary}</div>
       <div class="article-actions">
-        <a href="${article.file}">Read Article →</a>
-        <button onclick="saveArticle('${article.file}')">💾 Save</button>
+        <a href="${article.file}">o lukin e lipu →</a>
+        <button onclick="saveArticle('${article.file}')">💾 o awen e lipu</button>
       </div>
     `;
     articlesList.appendChild(li);
@@ -55,10 +44,20 @@ fetch('articles-index.json').then(res => res.json()).then(data => {
 
 function saveArticle(url) {
   caches.open('lipu-suli').then(cache => {
-    cache.add(url).then(() => alert('Article saved offline!'))
-      .catch(() => alert('Failed to save article offline.'));
+    cache.add(url).then(() => alert('lipu li awen lon ilo sina!'))
+      .catch(() => alert('lipu li pakala tan ni: awen ala.'));
   });
 }
+
+// Dark mode toggle
+const darkToggle = document.getElementById('dark-mode-toggle');
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+darkToggle.onclick = () => {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+};
 
 // Service worker registration
 if ('serviceWorker' in navigator) {
