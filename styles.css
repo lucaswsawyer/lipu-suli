@@ -6,6 +6,7 @@
   --nav-bg: #fff;
   --nav-fg: #000;
 }
+
 .dark {
   --bg: #000;
   --text: #fff;
@@ -25,11 +26,19 @@ body {
 header.masthead {
   padding: 16px;
   border-bottom: 1px solid #ccc;
+  text-align: center;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: 700;
   margin: 0 0 8px;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
 }
 
 .date {
@@ -43,14 +52,45 @@ h1, h2 {
   padding: 16px;
 }
 
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.source-tabs {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid #ccc;
+  margin: 8px 16px;
+}
+
+.source-tabs button {
+  flex: none;
+  padding: 8px 16px;
+  margin: 0;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: var(--text);
+  border-bottom: 2px solid transparent;
+}
+
+.source-tabs button.active {
+  border-bottom: 2px solid var(--text);
+  font-weight: bold;
+}
+
 .bottom-nav {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   background: var(--nav-bg);
   border-top: 1px solid #ccc;
   height: 56px;
 }
+
 .bottom-nav a {
   flex: 1;
   text-align: center;

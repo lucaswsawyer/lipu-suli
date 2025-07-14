@@ -21,9 +21,8 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
-// Common: date, manifest version, dark-mode toggle
+// Common: date, version check, dark-mode toggle
 (async function () {
-  // Date under title
   const dateEl = document.getElementById('page-date');
   if (dateEl) {
     dateEl.textContent = new Date().toLocaleDateString('en-US', {
@@ -46,7 +45,7 @@ if ('serviceWorker' in navigator) {
     console.warn('Manifest check failed', err);
   }
 
-  // Dark mode toggle
+  // Dark-mode toggle
   const toggle = document.getElementById('dark-mode-toggle');
   if (toggle) {
     toggle.addEventListener('click', () => {
@@ -56,10 +55,25 @@ if ('serviceWorker' in navigator) {
   }
 })();
 
-// Load articles on Home page
+// Home page: load articles + Save buttons + filtering
 (function () {
   const ul = document.getElementById('articles-list');
   if (!ul) return;
+  const main = document.querySelector('main.content');
+
+  // Create source tabs
+  const tabs = document.createElement('nav');
+  tabs.className = 'source-tabs';
+  ['all', 'reuters', 'cnn', 'guardian', 'bbc'].forEach(src => {
+    const btn = document.createElement('button');
+    btn.dataset.source = src;
+    btn.textContent = src === 'all'
+      ? 'All'
+      : src.charAt(0).toUpperCase() + src.slice(1);
+    if (src === 'all') btn.classList.add('active');
+    tabs.appendChild(btn);
+  });
+  main.insertBefore(tabs, ul);
 
   (async () => {
     try {
@@ -69,11 +83,11 @@ if ('serviceWorker' in navigator) {
 
       for (const file of files) {
         const txt = await fetch(`articles/${file}`).then(r => r.text());
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(txt, 'text/html');
+        const doc = new DOMParser().parseFromString(txt, 'text/html');
         const title = doc.querySelector('h1')?.textContent || file;
-
         const li = document.createElement('li');
+        li.dataset.source = file.split('_')[0];
+
         const a = document.createElement('a');
         a.href = `articles/${file}`;
         a.textContent = title;
@@ -84,7 +98,10 @@ if ('serviceWorker' in navigator) {
           if (!saved.includes(file)) {
             saved.push(file);
             localStorage.setItem('savedArticles', JSON.stringify(saved));
-            navigator.serviceWorker.controller?.postMessage({ action: 'save-article', url: `articles/${file}` });
+            navigator.serviceWorker.controller?.postMessage({
+              action: 'save-article',
+              url: `articles/${file}`
+            });
             btn.textContent = '✓ Saved';
           }
         };
@@ -92,29 +109,39 @@ if ('serviceWorker' in navigator) {
         li.append(a, ' ', btn);
         ul.appendChild(li);
       }
+
+      // Tab click filtering
+      tabs.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabs.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const src = btn.dataset.source;
+          ul.querySelectorAll('li').forEach(li => {
+            li.style.display = src === 'all' || li.dataset.source === src
+              ? '' : 'none';
+          });
+        });
+      });
     } catch (e) {
       console.error('Error loading articles', e);
     }
   })();
 })();
 
-// Build Saved list
+// Saved page: build list with remove buttons
 (function () {
   const ul = document.getElementById('saved-list');
   if (!ul) return;
-
   let saved = JSON.parse(localStorage.getItem('savedArticles') || '[]');
   if (!saved.length) {
     ul.innerHTML = '<li>sina ala jo e lipu mani.</li>';
     return;
   }
-
   for (const file of saved) {
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.href = `articles/${file}`;
     a.textContent = file.replace('.html', '').replace(/_/g, ' ');
-
     const btn = document.createElement('button');
     btn.textContent = '🗑️ Remove';
     btn.onclick = () => {
@@ -122,7 +149,6 @@ if ('serviceWorker' in navigator) {
       localStorage.setItem('savedArticles', JSON.stringify(saved));
       li.remove();
     };
-
     li.append(a, ' ', btn);
     ul.appendChild(li);
   }
