@@ -35,7 +35,7 @@ if (articlesList) {
       articlesList.innerHTML = '';
       data.forEach(article => {
         // Assume "file" is like "articles/bbc_somefile.html"
-        let src = article.file.split('/')[1].split('_')[0].toLowerCase(); // e.g. "bbc"
+        let src = article.publisher.toLowerCase().replace('the ', '').trim();
         const li = document.createElement('li');
         li.dataset.source = src;
         li.innerHTML = `<a href="${article.file}">${article.title}</a>`;
